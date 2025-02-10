@@ -1,0 +1,13 @@
+.main {
+  background-color: light-dark(#ebebeb, var(--mantine-color-dark-9));
+}
+.navbar {
+  background-color: #000e36;
+  color: white;
+  font-weight: 700;
+  border: none;
+  transition: all 0.2s ease;
+}
+.header {
+  border: none;
+}

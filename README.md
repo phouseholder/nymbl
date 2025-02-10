@@ -1,100 +1,53 @@
-# Welcome to React Router!
+# Parker Householder's Remix Template
 
-A modern, production-ready template for building full-stack React applications using React Router.
+This is my repository for creating web applications using Remix. My Remix Template acts a skeleton for creating enterprise level CRUD applications. Follow the steps below to set up an example in your local environment
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+## Prerequisites
 
-## Features
+To get started, please ensure your local machine has the following installed
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+- **Node 21 or higher** 📦
+- **Docker** 🐳
+- **pgAdmin 4** 🛠️
 
-## Getting Started
+## Installation Guide
 
-### Installation
+### Step 1: Clone Repository from Github
 
-Install the dependencies:
+Clone this repository to your local machine
 
-```bash
+```sh
+git clone https://github.com/phouseholder/MyRemixTemplate
+cd MyRemixTemplate
+```
+
+### Step 2: Deploy Infrastructure
+
+Start the infrastructure with docker. This will connect you with the Vercel hosted db and set up the POSTGREST API which will listen on http://localhost:8080
+
+```sh
+docker-compose up -d
+```
+
+### Step 3: Install Dependencies
+
+Install all dependencies using npm
+
+```sh
 npm install
 ```
 
-### Development
+### Step 4: Start Development
 
-Start the development server with HMR:
+Kick off your development server using npm. This will run on http://localhost:5173 and communicate with the infrastructure set up in Step 2.
 
-```bash
+```sh
 npm run dev
 ```
 
-Your application will be available at `http://localhost:5173`.
+### Step 5: Authenticate
 
-## Building for Production
+Navigate to http://localhost:5173 and use the following credentials to authenticate:
 
-Create a production build:
-
-```bash
-npm run build
-```
-
-## Deployment
-
-### Docker Deployment
-
-This template includes three Dockerfiles optimized for different package managers:
-
-- `Dockerfile` - for npm
-- `Dockerfile.pnpm` - for pnpm
-- `Dockerfile.bun` - for bun
-
-To build and run using Docker:
-
-```bash
-# For npm
-docker build -t my-app .
-
-# For pnpm
-docker build -f Dockerfile.pnpm -t my-app .
-
-# For bun
-docker build -f Dockerfile.bun -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
-```
-
-The containerized application can be deployed to any platform that supports Docker, including:
-
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
-```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
-
----
-
-Built with ❤️ using React Router.
+- username: **admin**
+- password: **password**

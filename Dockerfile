@@ -1,22 +1,32 @@
-FROM node:20-alpine AS development-dependencies-env
-COPY . /app
-WORKDIR /app
-RUN npm ci
+FROM --platform=linux/amd64 node:21
 
-FROM node:20-alpine AS production-dependencies-env
-COPY ./package.json package-lock.json /app/
-WORKDIR /app
-RUN npm ci --omit=dev
+# Create a non-root user and set the ownership
+RUN groupadd -r nodeuser && useradd -r -g nodeuser nodeuser
 
-FROM node:20-alpine AS build-env
-COPY . /app/
-COPY --from=development-dependencies-env /app/node_modules /app/node_modules
-WORKDIR /app
+# Set the working directory and permissions
+WORKDIR /nymbl
+
+# Ensure the directory and all subdirectories have the correct permissions
+RUN chown -R nodeuser:nodeuser /nymbl
+
+# Copy package.json and package-lock.json
+COPY --chown=nodeuser:nodeuser package*.json ./
+
+
+# Install dependencies
+RUN npm install
+
+# Copy the application files
+COPY --chown=nodeuser:nodeuser . /nymbl
+
+# Copy the correct .env file
+# COPY --chown=nodeuser:nodeuser .env /app/.env
+
+# Switch to non-root user
+USER nodeuser
+
+# Build the Application
 RUN npm run build
 
-FROM node:20-alpine
-COPY ./package.json package-lock.json /app/
-COPY --from=production-dependencies-env /app/node_modules /app/node_modules
-COPY --from=build-env /app/build /app/build
-WORKDIR /app
+# Run the application
 CMD ["npm", "run", "start"]
