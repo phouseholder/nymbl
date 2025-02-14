@@ -1,4 +1,4 @@
-import { IconClipboardList, IconDashboard, IconLogout, IconUsers, type IconProps, type Icon } from "@tabler/icons-react";
+import { IconClipboardList, IconDashboard, IconLogout, IconUsers, IconBox, type IconProps, type Icon } from "@tabler/icons-react";
 
 export interface ILink {
     label: string;
@@ -29,5 +29,10 @@ export const links: ILink[] = [
         to: "/Orders",
         label: "Orders",
         icon: IconClipboardList,
+    },
+    {
+        to: "/Products",
+        label: "Products",
+        icon: IconBox
     },
 ];

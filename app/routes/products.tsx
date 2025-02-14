@@ -1,7 +1,7 @@
 import MyAppShell from "~/layouts/MyAppShell";
-import type { Route } from "./+types/orders";
+import type { Route } from "./+types/products";
 import database from "~/postgrest/database";
-import { orderFields, type IOrder } from "~/models";
+import { productFields } from "~/models";
 import { Grid } from "@mantine/core";
 import { Panel, MyGrid } from "~/components";
 import { handleCRUD } from "~/utils/crud";
@@ -9,7 +9,10 @@ import { authorize } from "~/utils/auth";
 import { redirect } from "react-router";
 
 export function meta({}: Route.MetaArgs) {
-  return [{ title: "Orders" }, { name: "Orders", content: "Nymbl Orders" }];
+  return [
+    { title: "Products" },
+    { name: "Products", content: "Nymbl Products" },
+  ];
 }
 
 export async function loader({ request }: Route.LoaderArgs) {
@@ -20,21 +23,21 @@ export async function loader({ request }: Route.LoaderArgs) {
   }
   return {
     role: role?.toString(),
-    orders: await database.findAll("order"),
+    products: await database.findAll("product"),
   };
 }
 
 export async function action({ request }: Route.ActionArgs) {
-  return await handleCRUD(request, orderFields, "order");
+  return await handleCRUD(request, productFields, "product");
 }
 
-export default function Orders({ loaderData }: Route.ComponentProps) {
+export default function Products({ loaderData }: Route.ComponentProps) {
   return (
     <MyAppShell role={loaderData.role}>
       <Grid p="md">
         <Grid.Col>
-          <Panel title="Orders">
-            <MyGrid fields={orderFields} rowData={loaderData.orders} />
+          <Panel title="Products">
+            <MyGrid fields={productFields} rowData={loaderData.products} />
           </Panel>
         </Grid.Col>
       </Grid>

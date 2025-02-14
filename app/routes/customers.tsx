@@ -5,6 +5,8 @@ import { customerFields, type ICustomer } from "~/models";
 import { MyGrid, Panel } from "~/components";
 import { Grid } from "@mantine/core";
 import { handleCRUD } from "~/utils/crud";
+import { authorize } from "~/utils/auth";
+import { redirect } from "react-router";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -13,8 +15,16 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-export async function loader() {
-  return { customers: await database.findAll("customer") };
+export async function loader({ request }: Route.LoaderArgs) {
+  const { role } = await authorize(request);
+
+  if (!role) {
+    return redirect("/auth/login");
+  }
+  return {
+    role: role?.toString(),
+    customers: await database.findAll("customer"),
+  };
 }
 
 export async function action({ request }: Route.ActionArgs) {
@@ -23,7 +33,7 @@ export async function action({ request }: Route.ActionArgs) {
 
 export default function Customers({ loaderData }: Route.ComponentProps) {
   return (
-    <MyAppShell>
+    <MyAppShell role={loaderData.role}>
       <Grid p="md">
         <Grid.Col>
           <Panel title="Customers">

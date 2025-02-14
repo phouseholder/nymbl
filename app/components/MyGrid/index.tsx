@@ -4,15 +4,25 @@ import {
   ClientSideRowModelModule,
   QuickFilterModule,
   PaginationModule,
+  colorSchemeDark,
+  themeQuartz,
 } from "ag-grid-community";
 import { AgGridReact } from "ag-grid-react";
 import { type IModelField } from "~/models";
-import { Group, Button, TextInput, Text, rem } from "@mantine/core";
+import {
+  Group,
+  Button,
+  TextInput,
+  Text,
+  rem,
+  useComputedColorScheme,
+} from "@mantine/core";
 import { IconSearch } from "@tabler/icons-react";
 import { useState } from "react";
 import { useDisclosure } from "@mantine/hooks";
 import { MyModal, MyForm } from "~/components";
 import GridActions from "./GridActions";
+import { type Database } from "~/postgrest/database";
 
 ModuleRegistry.registerModules([
   ClientSideRowModelModule,
@@ -33,6 +43,8 @@ export default function MyGrid({ fields, formAction, rowData }: IMyGrid) {
   const [delOpened, { open: delOpen, close: delClose }] = useDisclosure(false);
   const [editOpened, { open: editOpen, close: editClose }] =
     useDisclosure(false);
+  const [defaultValues, setDefaultValues] =
+    useState<Partial<Database["Tables"][keyof Database["Tables"]]["Row"]>>();
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.currentTarget;
@@ -44,10 +56,15 @@ export default function MyGrid({ fields, formAction, rowData }: IMyGrid) {
     setSelectedID(id);
   };
 
-  const handleEdit = (id: string) => {
+  const handleEdit = (data: any) => {
     editOpen();
-    setSelectedID(id);
+    setSelectedID(data.id);
+    setDefaultValues(data);
   };
+
+  const computedColorScheme = useComputedColorScheme("light", {
+    getInitialValueInEffect: true,
+  });
 
   const actions = {
     field: "id",
@@ -56,7 +73,7 @@ export default function MyGrid({ fields, formAction, rowData }: IMyGrid) {
       return (
         <GridActions
           onDelete={() => handleDelete(params.data.id)}
-          onEdit={() => handleEdit(params.data.id)}
+          onEdit={() => handleEdit(params.data)}
         />
       );
     },
@@ -104,6 +121,11 @@ export default function MyGrid({ fields, formAction, rowData }: IMyGrid) {
           pagination={true}
           paginationPageSize={10}
           paginationPageSizeSelector={[10, 25, 50, 100]}
+          theme={
+            computedColorScheme === "dark"
+              ? themeQuartz.withPart(colorSchemeDark)
+              : undefined
+          }
         />
       </div>
       <MyModal title="Delete Title" opened={delOpened} close={delClose}>
@@ -139,7 +161,7 @@ export default function MyGrid({ fields, formAction, rowData }: IMyGrid) {
           onSubmit={editClose}
           onCancel={editClose}
           color="blue"
-          defaultValues={undefined}
+          defaultValues={defaultValues}
           action={formAction}
         >
           <input type="text" name="id" value={selectedID} readOnly hidden />

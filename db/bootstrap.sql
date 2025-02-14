@@ -7,7 +7,9 @@ CREATE TABLE IF NOT EXISTS public."user" (
 );
 
 INSERT INTO public."user" (username, display_name, "role", password)
-VALUES ('admin', 'Adam Inn', 'admin', '72177f3cc902f7b7296c1f17d6724550:d86edf8e0e817cc1e1adf8669ed4b78eda8a67f950de120599c923d29d138498a7f41474320126bc75d7b4eb0a42ed376d56ea9a018450e550adf108644cb911')
+VALUES 
+('admin', 'Adam Inn', 'admin', '7343e17d5c6de860a800d5f5f785ad5c:858b98d4944894f28c1f1b6426672554177c2dca8a9c166734cffa9575df810cb9bc02f15a29cb4985bcfc7ec98b7176cc9c9fe6cde40d752fdbfc81e83fdfee'),
+('phouseholder', 'Parker Householder', 'user', '7343e17d5c6de860a800d5f5f785ad5c:858b98d4944894f28c1f1b6426672554177c2dca8a9c166734cffa9575df810cb9bc02f15a29cb4985bcfc7ec98b7176cc9c9fe6cde40d752fdbfc81e83fdfee')
 ON CONFLICT (username) DO NOTHING;
 
 

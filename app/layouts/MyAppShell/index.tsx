@@ -17,9 +17,10 @@ import logo from "~/assets/img/logo.png";
 
 interface IMyAppShell {
   children: React.ReactNode;
+  role?: string;
 }
 
-export default function MyAppShell({ children }: IMyAppShell) {
+export default function MyAppShell({ children, role }: IMyAppShell) {
   const [opened, { toggle }] = useDisclosure();
   const [nav, { toggle: toggleNav }] = useDisclosure();
 
@@ -59,17 +60,17 @@ export default function MyAppShell({ children }: IMyAppShell) {
               hiddenFrom="sm"
               size="sm"
             />
-            {!isTablet && <Configuration />}
+            {!isTablet && role === "admin" && <Configuration />}
           </Stack>
         </Flex>
       </AppShell.Header>
 
       <AppShell.Navbar className={classes.navbar}>
         <AppShell.Section grow>
-          <Navbar links={links} hideLabel={nav && !isTablet} />
+          <Navbar links={links} />
         </AppShell.Section>
         <AppShell.Section>
-          <Navbar links={footerLinks} hideLabel={nav && !isTablet} />
+          <Navbar links={footerLinks} />
         </AppShell.Section>
       </AppShell.Navbar>
 

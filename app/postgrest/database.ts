@@ -1,6 +1,4 @@
-import { type ICustomer } from "~/models/customer";
-import { type IOrder } from "~/models/order";
-import { type IUser } from "~/models/user";
+import type { ICustomer, IOrder, IUser, IProduct } from '~/models';
 import { deleteRow } from "./delete";
 import { findAll } from "./findAll";
 import { findOne } from "./findOne";
@@ -28,6 +26,11 @@ export interface Database {
       Insert: Omit<IOrder, "id" | "added_on">; // Assuming 'id' and 'added_on' are auto-generated
       Update: Partial<Omit<IOrder, "id" | "added_on">>; // Partial updates
     };
+    product: {
+      Row: IProduct;
+      Insert: Omit<IOrder, "id" | "added_on">;
+      Update: Partial<Omit<IProduct, "id" | "added_on">>;
+    }
   };
 }
 
