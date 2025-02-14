@@ -17,8 +17,8 @@ To get started, please ensure your local machine has the following installed
 Clone this repository to your local machine
 
 ```sh
-git clone https://github.com/phouseholder/MyRemixTemplate
-cd MyRemixTemplate
+git clone https://github.com/phouseholder/nymbl
+cd nymbl
 ```
 
 ### Step 2: Deploy Infrastructure
