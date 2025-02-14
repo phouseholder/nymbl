@@ -38,8 +38,8 @@ export interface IUser {
     {
       name: "password",
       label: "Password",
-      placeholder: "Enter phone number",
+      placeholder: "Enter Password",
       required: true,
-      type: "string",
+      type: "password",
     },
   ];

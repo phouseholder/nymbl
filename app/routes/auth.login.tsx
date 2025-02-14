@@ -15,9 +15,10 @@ import {
 import { IconInfoCircle } from "@tabler/icons-react";
 import logo from "~/assets/img/logo.png";
 import { useDisclosure } from "@mantine/hooks";
-import { MyModal } from "~/components";
+import { MyModal, MyForm } from "~/components";
 import database from "~/postgrest/database";
 import { checkPassword } from "~/utils/auth";
+import { userFields } from "~/models";
 
 export async function loader({ request }: Route.LoaderArgs) {
   const userId = await getUserId(request);
@@ -132,8 +133,16 @@ export default function Auth({ actionData }: Route.ComponentProps) {
           </Form>
         </Paper>
       </Stack>
-      <MyModal opened={opened} close={close}>
-        Sign Up
+      <MyModal title="Create Title" opened={opened} close={close}>
+        <MyForm
+          fields={userFields}
+          method="POST"
+          onSubmit={close}
+          onCancel={close}
+          color="green"
+          submitText="Create"
+          action="/Users"
+        />
       </MyModal>
     </Flex>
   );

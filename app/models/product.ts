@@ -27,7 +27,7 @@ export const productFields: IModelField[] = [
     name: "price",
     alias: "price",
     label: "Price",
-    placeholder: "Enter customer ID",
+    placeholder: "Enter price",
     required: false,
     type: "number"
   },

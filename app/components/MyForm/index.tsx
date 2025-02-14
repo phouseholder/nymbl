@@ -6,6 +6,7 @@ import {
   Button,
   Flex,
   Grid,
+  PasswordInput,
 } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import database from "~/postgrest/database";
@@ -89,6 +90,18 @@ function renderFields(
             return (
               <Grid.Col key={name}>
                 <NumberInput
+                  name={name}
+                  label={label}
+                  placeholder={placeholder}
+                  required={required}
+                  defaultValue={defaults ? defaults[name] : undefined}
+                />
+              </Grid.Col>
+            );
+          case "password":
+            return (
+              <Grid.Col key={name}>
+                <PasswordInput
                   name={name}
                   label={label}
                   placeholder={placeholder}
