@@ -1,6 +1,42 @@
 .navLink:hover,
 .navLink:where([data-active]) {
-  color: light-dark(black, white);
-  background-color: var(--mantine-color-body);
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+  color: light-dark(var(--mantine-color-gray-9), var(--mantine-color-dark-0));
+  background-color: light-dark(var(--mantine-color-blue-1), var(--mantine-color-blue-8));
+  box-shadow: light-dark(
+    rgba(0, 0, 0, 0.03) 0px 2px 4px 0px,
+    rgba(255, 255, 255, 0.03) 0px 2px 4px 0px
+  );
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-size: var(--mantine-font-size-sm);
+  color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-1));
+  padding: var(--mantine-spacing-xs) var(--mantine-spacing-sm);
+  border-radius: var(--mantine-radius-sm);
+  font-weight: 500;
+  width: 100%;
+  box-shadow: none;
+}
+
+.link:hover {
+  background-color: light-dark(var(--mantine-color-blue-0), var(--mantine-color-blue-9));
+  color: light-dark(var(--mantine-color-blue-9), var(--mantine-color-blue-0));
+  box-shadow: var(--mantine-shadow-sm);
+}
+
+.link[data-active],
+.link[data-active]:hover {
+  background-color: light-dark(var(--mantine-color-blue-1), var(--mantine-color-blue-8));
+  color: light-dark(var(--mantine-color-blue-9), var(--mantine-color-blue-0));
+  box-shadow: var(--mantine-shadow-sm);
+}
+
+.icon {
+  width: rem(20);
+  height: rem(20);
+  margin-right: var(--mantine-spacing-sm);
+  stroke-width: rem(1.5);
 }

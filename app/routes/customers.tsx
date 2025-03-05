@@ -23,7 +23,7 @@ export async function loader({ request }: Route.LoaderArgs) {
   }
   return {
     role: role?.toString(),
-    customers: await database.findAll("customer"),
+    customers: await database.findAll("customer", undefined, customerFields),
   };
 }
 

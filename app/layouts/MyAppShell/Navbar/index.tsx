@@ -19,9 +19,8 @@ export default function Navbar({ links }: INavbar) {
           label={label}
           leftSection={<Icon size="1.5rem" stroke={1.5} />}
           data-active={to === location.pathname || undefined}
-          variant="filled"
+          variant="subtle"
           className={classes.navLink}
-          color="var(--mantine-color-body)"
         />
       ))}
     </>

@@ -1,5 +1,6 @@
 import { Modal } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
+import classes from "./MyModal.module.css";
 
 interface IMyModal {
   children: React.ReactNode;
@@ -36,6 +37,11 @@ export default function MyModal({
           timingFunction: "linear",
         }}
         size={size}
+        classNames={{
+          content: classes.modal,
+          header: classes.header,
+          title: classes.title,
+        }}
       >
         {children}
       </Modal>

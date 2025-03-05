@@ -17,7 +17,7 @@ import {
   rem,
   useComputedColorScheme,
 } from "@mantine/core";
-import { IconSearch } from "@tabler/icons-react";
+import { IconSearch, IconPlus } from "@tabler/icons-react";
 import { useState } from "react";
 import { useDisclosure } from "@mantine/hooks";
 import { MyModal, MyForm } from "~/components";
@@ -94,9 +94,17 @@ export default function MyGrid({ fields, formAction, rowData }: IMyGrid) {
   return (
     <>
       <Group mb="sm" justify="space-between">
-        <Button size="xs" onClick={addOpen} color="green">
-          Create
-        </Button>
+        <Group>
+          <Button 
+            size="sm" 
+            onClick={addOpen} 
+            variant="light" 
+            color="green"
+            leftSection={<IconPlus size={16} />}
+          >
+            Create
+          </Button>
+        </Group>
         <TextInput
           placeholder="Search"
           id="search"

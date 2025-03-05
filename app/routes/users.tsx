@@ -17,7 +17,7 @@ export async function loader({ request }: Route.LoaderArgs) {
   }
   return {
     role: role?.toString(),
-    orders: await database.findAll("user"),
+    users: await database.findAll("user", undefined, userFields),
   };
 }
 

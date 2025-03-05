@@ -12,7 +12,7 @@ import { links, footerLinks } from "./Navbar/links";
 import classes from "./MyAppShell.module.css";
 import Configuration from "./Configuration";
 import { IconChevronRight, IconChevronLeft } from "@tabler/icons-react";
-import { useDisclosure, useMediaQuery } from "@mantine/hooks";
+import { useDisclosure, useMediaQuery, useLocalStorage } from "@mantine/hooks";
 import logo from "~/assets/img/logo.png";
 
 interface IMyAppShell {
@@ -22,9 +22,14 @@ interface IMyAppShell {
 
 export default function MyAppShell({ children, role }: IMyAppShell) {
   const [opened, { toggle }] = useDisclosure();
-  const [nav, { toggle: toggleNav }] = useDisclosure();
+  const [nav, setNav] = useLocalStorage({
+    key: 'navbar-collapsed',
+    defaultValue: false,
+  });
 
   const isTablet = useMediaQuery("(max-width: 48em)");
+
+  const toggleNav = () => setNav((current) => !current);
 
   return (
     <AppShell

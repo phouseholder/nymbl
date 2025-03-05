@@ -1,0 +1,24 @@
+.modal {
+  background-color: light-dark(#ffffff, #1A1B1E);
+  border: 1px solid light-dark(rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.05));
+  box-shadow: light-dark(
+    rgba(0, 0, 0, 0.03) 0px 2px 4px 0px,
+    rgba(255, 255, 255, 0.03) 0px 2px 4px 0px
+  );
+}
+
+.title {
+  font-weight: 700;
+  text-transform: uppercase;
+  color: light-dark(var(--mantine-color-gray-9), var(--mantine-color-dark-0));
+}
+
+.header {
+  background-color: light-dark(#ffffff, #1A1B1E);
+  border-bottom: 1px solid light-dark(rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.05));
+  box-shadow: light-dark(
+    rgba(0, 0, 0, 0.03) 0px 2px 4px 0px,
+    rgba(255, 255, 255, 0.03) 0px 2px 4px 0px
+  );
+  padding: var(--mantine-spacing-sm);
+} 

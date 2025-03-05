@@ -4,6 +4,12 @@
 }
 
 .PanelContent {
-  box-shadow: 1px 1px 10px
-    light-dark(rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+  box-shadow: light-dark(
+    rgba(0, 0, 0, 0.03) 0px 2px 4px 0px,
+    rgba(255, 255, 255, 0.03) 0px 2px 4px 0px
+  );
+  background-color: light-dark(#ffffff, #1A1B1E);
+  border: 1px solid light-dark(rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.05));
+  height: 100%;
+  overflow: auto;
 }
