@@ -18,42 +18,5 @@ export async function findAll<T extends keyof Database["Tables"]>(
   fields?: IModelField[]
 ): Promise<Database["Tables"][T]["Row"][]> {
   // Perform the GET request to the PostgREST endpoint with the constructed URL
-  const rows = await get<Database["Tables"][T]["Row"][]>(tableUrl(table, options));
-
-  // If no fields are provided or no list-type fields exist, return the rows as is
-  if (!fields) return rows;
-
-  // Find all list-type fields
-  const listFields = fields.filter(field => field.type === 'list' && field.list_type);
-
-  // For each row, process list-type fields
-  const processedRows = await Promise.all(rows.map(async (row) => {
-    const processedRow = { ...row };
-
-    // Process each list-type field
-    for (const field of listFields) {
-      const fkValue = row[field.name as keyof typeof row];
-      if (fkValue && field.list_type) {
-        try {
-          // Fetch the referenced record
-          const referencedRecord = await get<Database["Tables"][typeof field.list_type]["Row"][]>(
-            tableUrl(field.list_type, `id=eq.${fkValue}`)
-          );
-
-          if (referencedRecord.length > 0) {
-            // Find the title field in the referenced record
-            const titleField = field.list_fields?.find(f => f.list_title)?.name || 'name';
-            // Replace the foreign key with the title value
-            processedRow[field.name as keyof typeof row] = referencedRecord[0][titleField as keyof typeof referencedRecord[0]];
-          }
-        } catch (error) {
-          console.error(`Error fetching referenced record for ${field.name}:`, error);
-        }
-      }
-    }
-
-    return processedRow;
-  }));
-
-  return processedRows;
+  return await get<Database["Tables"][T]["Row"][]>(tableUrl(table, options));
 }

@@ -71,16 +71,13 @@ function ListField({ field, defaults, inputProps }: { field: IModelField; defaul
     loadData();
   }, [field.list_type, field.list_fields]);
 
-  // Get the default value, handling both aliased and non-aliased fields
-  const defaultValue = defaults ? String(defaults[field.alias?.split('.')[0] || field.name]) : undefined;
-
   return (
     <Grid.Col key={field.name}>
       <Select
         name={field.name}
         label={field.label}
         data={listData}
-        defaultValue={defaultValue}
+        defaultValue={defaults ? defaults[field.name] : undefined}
         clearable
         searchable
         disabled={isLoading}
