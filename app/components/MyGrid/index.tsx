@@ -66,6 +66,13 @@ export default function MyGrid({ fields, formAction, rowData }: IMyGrid) {
     getInitialValueInEffect: true,
   });
 
+  const customDarkTheme = themeQuartz.withParams({
+    backgroundColor: "#1A1B1E",
+    headerBackgroundColor: "#1A1B1E",
+    foregroundColor: "var(--mantine-color-dark-0)",
+    borderColor: "rgba(255, 255, 255, 0.05)",
+  });
+
   const actions = {
     field: "id",
     headerName: "Actions",
@@ -131,7 +138,7 @@ export default function MyGrid({ fields, formAction, rowData }: IMyGrid) {
           paginationPageSizeSelector={[10, 25, 50, 100]}
           theme={
             computedColorScheme === "dark"
-              ? themeQuartz.withPart(colorSchemeDark)
+              ? customDarkTheme
               : undefined
           }
         />
